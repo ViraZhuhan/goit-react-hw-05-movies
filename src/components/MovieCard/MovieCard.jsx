@@ -1,4 +1,5 @@
 import { WrapInfo, WrapCard, Title, SubTitle, Text } from './MovieCard.styled';
+import PropTypes from 'prop-types';
 
 const MovieCard = ({ movieDetals }) => {
   const { title, poster_path, overview, genres, release_date, vote_average } =
@@ -37,3 +38,18 @@ const MovieCard = ({ movieDetals }) => {
   );
 };
 export default MovieCard;
+
+
+
+MovieCard.propTypes = {
+  movieDetals: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired, 
+      poster_path: PropTypes.string.isRequired,
+      overview: PropTypes.string.isRequired,
+      release_date: PropTypes.string.isRequired,
+      vote_average: PropTypes.number.isRequired,
+      genres: PropTypes.array, 
+    })
+  ),
+};

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { SearchForm, SearchButton, Input } from './MovieSearchForm.styled';
+import PropTypes from 'prop-types';
 
 const MovieSearchForm = ({ setSearchParams }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -47,3 +48,8 @@ const MovieSearchForm = ({ setSearchParams }) => {
 };
 
 export default MovieSearchForm;
+
+
+MovieSearchForm.propTypes = {
+  setSearchParams: PropTypes.func
+}
