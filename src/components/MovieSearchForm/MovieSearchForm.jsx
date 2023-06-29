@@ -12,6 +12,7 @@ const MovieSearchForm = ({ setSearchParams }) => {
     if (searchQuery.trim() === '') {
       return toast.error('Please enter the query!');
     }
+
     setSearchParams({ searchQuery });
     setSearchQuery('');
   };

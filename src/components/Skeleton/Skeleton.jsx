@@ -5,7 +5,7 @@ export default function Skeleton() {
       <SkeletonList>
         {[...new Array(20)].map((el, index) => (
           <SkeletonCard key={index}>
-            <div className="image">...</div>
+            <div className="image"></div>
           </SkeletonCard>
         ))}
       </SkeletonList>

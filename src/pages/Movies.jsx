@@ -4,7 +4,6 @@ import { MovieList } from 'components/MovieList';
 import MovieSearchForm from 'components/MovieSearchForm/MovieSearchForm';
 import { getMovieByName } from '../api';
 import Skeleton from 'components/Skeleton/Skeleton';
-import { toast } from 'react-toastify';
 // import ErrorMessage from 'components/ErrorMessage';
 
 const STATUS = {
@@ -28,7 +27,6 @@ const Movies = () => {
     const fetchMoviesByname = async () => {
       try {
         const data = await getMovieByName({ searchQuery });
-        
         const movies = data.results.map(
           ({
             id,
@@ -51,20 +49,22 @@ const Movies = () => {
         setMovies(movies);
         setStatus(STATUS.RESOLVED);
       } catch (error) {
-        return toast.error('Movie is not found!');
+        setStatus(STATUS.REJECTED)
       }
     };
     fetchMoviesByname();
   }, [searchQuery]);
 
-  // const visibleErrorMessage = status === STATUS.REJECTED || movies.length<=0;
+  // const visibleErrorMessage = status === STATUS.REJECTED || movies.length===0;
+
 
   return (
     <div>
       <MovieSearchForm setSearchParams={setSearchParams} />
       {status === STATUS.PENDING && <Skeleton />}
+
       {movies.length > 0 && <MovieList movies={movies}/>}
-      {/* {visibleErrorMessage && <ErrorMessage>{error}</ErrorMessage>} */}
+      {/* {visibleErrorMessage && <ErrorMessage/>} */}
     </div>
   );
 }

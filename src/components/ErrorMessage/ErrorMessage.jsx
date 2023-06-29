@@ -5,7 +5,7 @@ export default function ErrorMessage() {
   return (
     <Message>
       <h2>Oops! 😫</h2>
-      <p>Not found movies</p>
+      <p>Movie is not found!</p>
     </Message>
   );
 }

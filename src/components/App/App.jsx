@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../Layout';
 import { Container} from './App.styled';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 
 const Home = lazy(() => import('pages/Home'));
