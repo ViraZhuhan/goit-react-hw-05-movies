@@ -1,0 +1,76 @@
+import { useState, useEffect } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { MovieList } from 'components/MovieList';
+import MovieSearchForm from 'components/MovieSearchForm/MovieSearchForm';
+import { getMovieByName } from '../api';
+import Skeleton from 'components/Skeleton/Skeleton';
+import ErrorMessage from 'components/ErrorMessage';
+
+const STATUS = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
+
+const Movies = () => {
+  const [movies, setMovies] = useState([]);
+  const [status, setStatus] = useState(STATUS.IDLE);
+  const [error, setError] = useState('');
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('searchQuery') ?? ' ';
+
+  useEffect(() => {
+    setStatus(STATUS.PENDING);
+    if (searchQuery === '') return;
+
+    const fetchMoviesByname = async () => {
+      try {
+        const data = await getMovieByName({ searchQuery });
+        if (data.results.length === 0) {
+          throw Error(`Not found movies with name "${searchQuery}"`);
+        }
+        const movies = data.results.map(
+          ({
+            id,
+            title,
+            genre_ids,
+            overview,
+            vote_average,
+            popularity,
+            poster_path,
+          }) => ({
+            id,
+            title,
+            genre_ids,
+            overview,
+            vote_average,
+            popularity,
+            poster_path,
+          })
+        );
+        setMovies(movies);
+        setStatus(STATUS.RESOLVED);
+      } catch (error) {
+        setError(error.message);
+        setStatus(STATUS.REJECTED);
+      }
+    };
+    fetchMoviesByname();
+  }, [searchQuery]);
+
+  // const visibleErrorMessage = status === STATUS.REJECTED || movies.length<=0;
+
+  return (
+    <div>
+      <MovieSearchForm setSearchParams={setSearchParams} />
+      {status === STATUS.PENDING && <Skeleton />}
+      {movies.length > 0 && <MovieList movies={movies}/>}
+      {/* {visibleErrorMessage && <ErrorMessage>{error}</ErrorMessage>} */}
+    </div>
+  );
+}
+
+
+export default Movies;
