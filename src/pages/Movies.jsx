@@ -16,7 +16,6 @@ const STATUS = {
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState(STATUS.IDLE);
-  const [error, setError] = useState('');
 
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('searchQuery') ?? ' ';
@@ -53,7 +52,7 @@ const Movies = () => {
         setMovies(movies);
         setStatus(STATUS.RESOLVED);
       } catch (error) {
-        setError(error.message);
+        alert(error)
         setStatus(STATUS.REJECTED);
       }
     };
