@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { MovieList } from 'components/MovieList';
 import MovieSearchForm from 'components/MovieSearchForm/MovieSearchForm';
 import { getMovieByName } from '../api';
 import Skeleton from 'components/Skeleton/Skeleton';
-import ErrorMessage from 'components/ErrorMessage';
+// import ErrorMessage from 'components/ErrorMessage';
 
 const STATUS = {
   IDLE: 'idle',
