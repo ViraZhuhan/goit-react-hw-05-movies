@@ -27,9 +27,9 @@ const Movies = () => {
     const fetchMoviesByname = async () => {
       try {
         const data = await getMovieByName({ searchQuery });
-        if (data.results.length === 0) {
-          throw Error(`Not found movies with name "${searchQuery}"`);
-        }
+        // if (data.results.length === 0) {
+        //   throw Error(`Not found movies with name "${searchQuery}"`);
+        // }
         const movies = data.results.map(
           ({
             id,
