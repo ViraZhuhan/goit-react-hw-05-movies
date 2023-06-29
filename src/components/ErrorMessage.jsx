@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { Message } from "./ErrorMessage.styled";
 
-export default function ErrorMessage({ children }) {
+export default function ErrorMessage() {
   return (
     <Message>
       <h2>Oops! 😫</h2>
-      <p>{children}</p>
+      <p>Not found movies</p>
     </Message>
   );
 }
