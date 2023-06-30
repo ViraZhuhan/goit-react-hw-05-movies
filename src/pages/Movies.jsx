@@ -16,7 +16,7 @@ const STATUS = {
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState(STATUS.IDLE);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('searchQuery') ?? ' ';
@@ -29,7 +29,6 @@ const Movies = () => {
     const fetchMoviesByname = async () => {
       setStatus(STATUS.PENDING);
       try {
-
         const data = await getMovieByName({ searchQuery });
         if (!data.results.length) {
           throw new Error("No matches found");
@@ -57,9 +56,9 @@ const Movies = () => {
         );
         setMovies(movies);
         setStatus(STATUS.RESOLVED);
-        setError(null);
+        // setError(null);
       } catch (error) {
-        setError(error);
+        // setError(error);
         setStatus(STATUS.REJECTED);
       }
     };
