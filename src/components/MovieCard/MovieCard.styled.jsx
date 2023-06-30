@@ -4,7 +4,7 @@ export const WrapCard = styled.div`
   margin-top: 16px;
   padding: 16px;
   display: flex;
-  gap: 16px;
+  gap: 8px;
   border: solid #f0f0f0;
 
   @media (min-width: 768px) {
@@ -22,7 +22,7 @@ export const Img = styled.img`
     width: 300px;
   }
   @media (min-width: 1200px) {
-    width: 320px;
+    width: 360px;
   }
 `;
 
@@ -48,6 +48,7 @@ export const Title = styled.h1`
 
 export const SubTitle = styled.h3`
   margin-bottom: 0px;
+  margin-top: 0px;
   font-size: 16px;
 
   @media (min-width: 768px) {

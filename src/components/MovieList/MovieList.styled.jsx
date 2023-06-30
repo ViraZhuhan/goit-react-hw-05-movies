@@ -1,16 +1,19 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 export const List = styled.ul`
-  padding: 0px;
   display: grid;
   max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 16px;
+
+  padding: 0px;
   margin-top: 16px;
   margin-bottom: 0;
-  list-style: none;
   margin-left: auto;
   margin-right: auto;
+
+ 
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, minmax(220px, 1fr));
@@ -21,7 +24,6 @@ export const List = styled.ul`
 `;
 
 export const WrapCard = styled.li`
-  position: relative;
   width: 100%;
   list-style: none;
   background: linear-gradient(
@@ -38,17 +40,16 @@ export const WrapCard = styled.li`
 
 export const Img = styled.img`
   width: 100%;
+  height: 320px;
   border-radius: 5px;
 `;
 
 export const Title = styled.h3`
   padding: 8px 12px;
-  content: '';
-  position: absolute;
-
   margin: 0px;
-  bottom: 0;
-  left: 0;
-
-  color: orangered;
+  color: white;
 `;
+
+export const LinkWrap = styled(Link) `
+text-decoration: none;
+`

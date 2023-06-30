@@ -1,6 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { List, WrapCard, Img, Title } from './MovieList.styled';
+import { List, WrapCard, Img, Title, LinkWrap} from './MovieList.styled';
 
 export const MovieList = ({ movies }) => {
   const location = useLocation();
@@ -12,13 +12,13 @@ export const MovieList = ({ movies }) => {
     <List>
       {movies.map(({ id, original_title, original_name, poster_path }) => (
         <WrapCard key={id}>
-          <Link to={`/movies/${id}`} state={{ from: location }}>
+          <LinkWrap to={`/movies/${id}`} state={{ from: location }}>
             <Img
               src={`${poster_path ? IMG_URL + poster_path : IMG_DF}`}
               loading="lazy"
             />
             <Title>{original_title ?? original_name}</Title>
-          </Link>
+          </LinkWrap>
         </WrapCard>
       ))}
     </List>
