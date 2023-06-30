@@ -49,7 +49,6 @@ const MovieSearchForm = ({ setSearchParams }) => {
 
 export default MovieSearchForm;
 
-
 MovieSearchForm.propTypes = {
-  setSearchParams: PropTypes.func
-}
+  setSearchParams: PropTypes.func,
+};

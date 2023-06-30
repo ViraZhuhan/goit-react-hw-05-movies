@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { getMovie } from '../api/index';
-import {MovieList} from '../components/MovieList';
+import { MovieList } from '../components/MovieList/MovieList';
 import { useEffect } from 'react';
 
 const Home = () => {
@@ -15,13 +15,11 @@ const Home = () => {
           throw Error(`No trend movies"`);
         }
         const movies = data.results.map(
-          ({
+          ({ id, original_name, original_title, poster_path }) => ({
             id,
-            title
-           
-          }) => ({
-            id,
-            title
+            original_name,
+            original_title,
+            poster_path,
           })
         );
 
@@ -42,6 +40,5 @@ const Home = () => {
     </main>
   );
 };
-
 
 export default Home;

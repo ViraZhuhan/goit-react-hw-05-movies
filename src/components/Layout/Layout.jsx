@@ -1,6 +1,6 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { Suspense } from 'react';
-import { Header, NavLinks } from '../components/App/App.styled';
+import { Header, NavLinks } from './Layout.styled';
 
 const Layout = () => {
   return (

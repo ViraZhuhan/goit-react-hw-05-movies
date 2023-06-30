@@ -21,6 +21,7 @@ export const SkeletonList = styled.ul`
 `;
 export const SkeletonCard = styled.li`
   width: 100%;
+  height: 260px;
   background: #fff;
   border-radius: 5px;
   padding: 25px 15px;

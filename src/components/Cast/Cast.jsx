@@ -1,7 +1,7 @@
 import { getCredits } from 'api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {List, Item} from './Cast.styled';
+import { List, Item } from './Cast.styled';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -49,13 +49,12 @@ const Cast = () => {
             width={100}
             alt={name}
           />
-          <p>{name}</p>
+          <h3>{name}</h3>
           <p>Character: {character}</p>
         </Item>
       ))}
     </List>
   );
 };
-
 
 export default Cast;

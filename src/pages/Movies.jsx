@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { MovieList } from 'components/MovieList';
+import { MovieList } from 'components/MovieList/MovieList';
 import MovieSearchForm from 'components/MovieSearchForm/MovieSearchForm';
 import { getMovieByName } from '../api';
 import Skeleton from 'components/Skeleton/Skeleton';
-// import ErrorMessage from 'components/ErrorMessage';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 
 const STATUS = {
   IDLE: 'idle',
@@ -16,21 +16,25 @@ const STATUS = {
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState(STATUS.IDLE);
+  const [error, setError] = useState(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('searchQuery') ?? ' ';
 
   useEffect(() => {
-    setStatus(STATUS.PENDING);
-    if (searchQuery === '') return;
+    movies && setStatus(STATUS.RESOLVED);
+  }, [movies]);
 
+  useEffect(() => {
     const fetchMoviesByname = async () => {
+      setStatus(STATUS.PENDING);
       try {
         const data = await getMovieByName({ searchQuery });
         const movies = data.results.map(
           ({
             id,
-            title,
+            original_name,
+            original_title,
             genre_ids,
             overview,
             vote_average,
@@ -38,7 +42,8 @@ const Movies = () => {
             poster_path,
           }) => ({
             id,
-            title,
+            original_name,
+            original_title,
             genre_ids,
             overview,
             vote_average,
@@ -49,25 +54,22 @@ const Movies = () => {
         setMovies(movies);
         setStatus(STATUS.RESOLVED);
       } catch (error) {
-        setStatus(STATUS.REJECTED)
+        setError(error);
+        setStatus(STATUS.REJECTED);
       }
     };
+
     fetchMoviesByname();
   }, [searchQuery]);
-
-  // const visibleErrorMessage = status === STATUS.REJECTED || movies.length===0;
-
 
   return (
     <div>
       <MovieSearchForm setSearchParams={setSearchParams} />
       {status === STATUS.PENDING && <Skeleton />}
-
-      {movies.length > 0 && <MovieList movies={movies}/>}
-      {/* {visibleErrorMessage && <ErrorMessage/>} */}
+      {status === STATUS.RESOLVED && <MovieList movies={movies} />}
+      {/* {status === STATUS.REJECTED && <ErrorMessage>{error}</ErrorMessage>}  */}
     </div>
   );
-}
-
+};
 
 export default Movies;
