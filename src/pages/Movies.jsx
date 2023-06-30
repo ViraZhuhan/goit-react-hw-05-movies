@@ -4,7 +4,7 @@ import { MovieList } from 'components/MovieList/MovieList';
 import MovieSearchForm from 'components/MovieSearchForm/MovieSearchForm';
 import { getMovieByName } from '../api';
 import Skeleton from 'components/Skeleton/Skeleton';
-import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+// import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 
 const STATUS = {
   IDLE: 'idle',
@@ -29,7 +29,11 @@ const Movies = () => {
     const fetchMoviesByname = async () => {
       setStatus(STATUS.PENDING);
       try {
+
         const data = await getMovieByName({ searchQuery });
+        if (!data.results.length) {
+          throw new Error("No matches found");
+        }
         const movies = data.results.map(
           ({
             id,
@@ -53,6 +57,7 @@ const Movies = () => {
         );
         setMovies(movies);
         setStatus(STATUS.RESOLVED);
+        setError(null);
       } catch (error) {
         setError(error);
         setStatus(STATUS.REJECTED);
