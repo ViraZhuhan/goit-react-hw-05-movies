@@ -8,15 +8,16 @@ export const WrapCard = styled.div`
   border: solid #f0f0f0;
 
   @media (min-width: 768px) {
-    gap: 20px;
+    gap: 16px;
   }
   @media (min-width: 1200px) {
-    gap: 24px;
+    gap: 20px;
   }
 `;
 
 export const Img = styled.img`
   width: 240px;
+  height: 500px;
 
   @media (min-width: 768px) {
     width: 300px;

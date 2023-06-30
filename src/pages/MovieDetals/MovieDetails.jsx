@@ -1,5 +1,5 @@
 import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useRef } from 'react';
 import { getInfoMovie } from '../../api';
 import { Item, Links, Text } from './MovieDetals.styled';
 import MovieCard from 'components/MovieCard/MovieCard';
@@ -20,6 +20,7 @@ const MovieDetails = () => {
   const { movieId } = useParams();
 
   const location = useLocation();
+  const backLinkLocationRef = useRef(location.state?.from ?? '/movies');
 
   useEffect(() => {
     movie && setStatus(STATUS.RESOLVED);
@@ -48,7 +49,7 @@ const MovieDetails = () => {
   if (status === STATUS.RESOLVED) {
     return (
       <div>
-        <Links to={location.state?.from || '/movies'}>Go back</Links>
+        <Links to={backLinkLocationRef.current}>Go back</Links>
         <MovieCard movieDetals={movie} />
         <Text>Aditional information</Text>
         <ul>
